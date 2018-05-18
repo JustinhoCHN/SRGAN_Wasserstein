@@ -1,7 +1,7 @@
 ## SRGAN_Wasserstein
 Applying Waseerstein GAN to SRGAN, a GAN based super resolution algorithm.
 
-***This repo was forked from @zsdonghao 's [tensorlayer/srgan](https://github.com/tensorlayer/srgan) repo, based on this original repo, I changed some code to apply wasserstein loss, making the training procedure more stable.***
+***This repo was forked from @zsdonghao 's [tensorlayer/srgan](https://github.com/tensorlayer/srgan) repo, based on this original repo, I changed some code to apply wasserstein loss, making the training procedure more stable, thanks @zsdonghao again, for his great reimplementation.***
 
 ### SRGAN Architecture
 ![](http://ormr426d5.bkt.clouddn.com/18-5-18/43943225.jpg)
@@ -10,7 +10,7 @@ TensorFlow Implementation of ["Photo-Realistic Single Image Super-Resolution Usi
 
 ### Wasserstein GAN
 
-When the SRGAN was first proposed in 2016, we haven't had [Wasserstein GAN](https://arxiv.org/abs/1701.07875)(2017) yet, WGAN using wasserstein distance to measure the disturibution difference between two data set. As for the original GAN training, we don't know when to stop training the discriminator or the generator, to get a nice result. But when using the wasserstein loss, as the loss decreasing, the result will be better. So we are going to use the WGAN and we are not going to explain the math detail of WGAN here, but to give the following steps to apply WGAN.
+When the SRGAN was first proposed in 2016, we haven't had [Wasserstein GAN](https://arxiv.org/abs/1701.07875)(2017) yet, WGAN using wasserstein distance to measure the disturibution difference between different data set. As for the original GAN training, we don't know when to stop training the discriminator or the generator, to get a nice result. But when using the wasserstein loss, as the loss decreasing, the result will be better. So we are going to use the WGAN and we are not going to explain the math detail of WGAN here, but to give the following steps to apply WGAN.
 
 * Remove the sigmoid activation from the last layer of the discriminator. (```model.py```, line 218-219)
 * Don't take logarithm to the loss of discriminator and generator. (```main.py```, line 105-108)
@@ -47,6 +47,13 @@ We run this script under [TensorFlow](https://www.tensorflow.org) 1.4 and the [T
 ```python
 config.TRAIN.img_path = "your_image_folder/"
 ```
+- Tenserboard logdir.
+
+I added the tensorboard callbacks to monitor the training procedure, please change the logdir to your folder.
+
+```python
+config.VALID.logdir = 'your_tensorboard_folder'
+```
 
 - Start training.
 
@@ -59,6 +66,14 @@ python main.py
 ```bash
 python main.py --mode=evaluate 
 ```
+
+### What's new?
+
+Compare with the original verson, I did the following changes:
+
+1. Adding WGAN, as described in Wasserstein GAN chapter.
+2. Adding tensorboard, to monitor the training procedure.
+3. Modified the last conv layer of 'SRGAN_g' in ```model.py``` (line 100), changing the kernel size from (1, 1) to (9, 9), as the paper proposed.
 
 ### Reference
 * [1] [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802)
