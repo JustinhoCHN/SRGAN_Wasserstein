@@ -80,7 +80,7 @@ Compare with the original verson, I did the following changes:
 * [2] [Is the deconvolution layer the same as a convolutional layer ?](https://arxiv.org/abs/1609.07009)
 * [3] [Wasserstein GAN](https://arxiv.org/abs/1701.07875)
 * [4] [令人拍案叫绝的Wasserstein GAN](https://zhuanlan.zhihu.com/p/25071913)
-* [5] [Professor ho：-知乎文章]() [Chinese verson readme]
+* [5] [SRGAN With WGAN，让超分辨率算法训练更稳定-知乎专栏](https://zhuanlan.zhihu.com/p/37009085) [Chinese verson readme]
 
 ### Author
 - [zsdonghao](https://github.com/zsdonghao)
