@@ -75,7 +75,7 @@ python main.py
 This pretrained weights is provided by the original author @zsdonghao , his final layer's conv kernel of ```SRGAN_g``` (model.py line 53) is using 1×1 kernel, but I changed this kernel to 9×9, so if you use this pretrained weights, you may get the weights unequal error.
 Two advice:
 1)Train the whole network from scratch, you'll get the 9×9 version weights, for further training or evaluating images.
-2)You can just change the ```SRGAN_g``` 's final conv kernel (```model.py``` line 53) to (1, 1) instead of (9, 9), and using the provided pretrained weights.
+2)You can just change the ```SRGAN_g``` 's final conv kernel (```model.py``` line 53) to (1, 1) instead of (9, 9), and change the ```model.py``` line 35 conv kernel from (9, 9) to (3, 3), so that you can use the pretrained weights.
 
 ```bash
 python main.py --mode=evaluate 
