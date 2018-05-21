@@ -50,7 +50,7 @@ pip install tensorflow-gpu==1.4.0
 pip install easydict
 ```
 
--  You can download [DIV2K - bicubic downscaling x4 competition](http://www.vision.ee.ethz.ch/ntire17/) dataset, and set your image folder in `config.py`,. 
+-  You can download [DIV2K - bicubic downscaling x4 competition](http://www.vision.ee.ethz.ch/ntire17/) dataset, and set your image folder in `config.py`. 
 - Other links for DIV2K, in case you can't find it : [test\_LR\_bicubic_X4](https://data.vision.ee.ethz.ch/cvl/DIV2K/validation_release/DIV2K_test_LR_bicubic_X4.zip), [train_HR](https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip), [train\_LR\_bicubic_X4](https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_LR_bicubic_X4.zip), [valid_HR](https://data.vision.ee.ethz.ch/cvl/DIV2K/validation_release/DIV2K_valid_HR.zip), [valid\_LR\_bicubic_X4](https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_LR_bicubic_X4.zip).
 
 ```python
@@ -70,7 +70,12 @@ config.VALID.logdir = 'your_tensorboard_folder'
 python main.py
 ```
 
-- Start evaluation. ([pretrained model](https://github.com/tensorlayer/srgan/releases/tag/1.2.0) for DIV2K)
+- Start evaluation. ([pretrained model](https://github.com/tensorlayer/srgan/releases/tag/1.2.0) for DIV2K) 
+**An important note:**
+This pretrained weights is provided by the original author @zsdonghao , his final layer's conv kernel of ```SRGAN_g``` (model.py line 53) is using 1×1 kernel, but I changed this kernel to 9×9, so if you use this pretrained weights, you may get the weights unequal error.
+Two advice:
+1)Train the whole network from scratch, you'll get the 9×9 version weights, for further training or evaluating images.
+2)You can just change the ```SRGAN_g``` 's final conv kernel (```model.py``` line 53) to (1, 1) instead of (9, 9), and using the provided pretrained weights.
 
 ```bash
 python main.py --mode=evaluate 
@@ -78,7 +83,7 @@ python main.py --mode=evaluate
 
 ### What's new?
 
-Compare with the original verson, I did the following changes:
+Compare with the original version, I did the following changes:
 
 1. Adding WGAN, as described in Wasserstein GAN chapter.
 2. Adding tensorboard, to monitor the training procedure.
