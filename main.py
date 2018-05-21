@@ -336,7 +336,8 @@ def evaluate():
     #tl.vis.save_image(valid_hr_img, save_dir+'/valid_hr.png')
 
     out_bicu = scipy.misc.imresize(valid_lr_img, [size[0]*4, size[1]*4], interp='bicubic', mode=None)
-    tl.vis.save_image(out_bicu, save_dir + '/bicubic_' + img_name[:-4] + '.png')
+    #tl.vis.save_image(out_bicu, save_dir + '/bicubic_' + img_name[:-4] + '.png')
+    tl.vis.save_image(out_bicu, save_dir + '/valid_bicubic.png')
 
 if __name__ == '__main__':
     import argparse
